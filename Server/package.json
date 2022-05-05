@@ -1,0 +1,9 @@
+{
+  "type" :"commonjs",
+  "dependencies": {
+    "express": "^4.18.1",
+    "node-imap": "^0.9.6",
+    "smtp-client": "^0.4.0",
+    "yapople": "^0.4.8"
+  }
+}
