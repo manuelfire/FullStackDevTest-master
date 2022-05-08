@@ -30,13 +30,13 @@ try{
     
 }
 
-export const IMAPGetMail = (config,id) => async (dispatch) => {
+export const IMAPGetMail = (id) => async (dispatch) => {
 
     try{
         
-        const {data} = await api.IMAPfetchOne(config,id);
+        const {data} = await api.IMAPfetchOne(id);
         
-        console.log(data);
+       
         const action = {type : ActionType.IMAP_GETONEMAIL, payload : data};
     
         dispatch(action);
