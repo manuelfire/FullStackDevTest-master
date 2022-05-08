@@ -8,8 +8,11 @@ export  default   (emails  = [],action ) =>{
             return action.payload;
         case ActionType.IMAP_GETONEMAIL:
         case ActionType.POP3_GETONEMAIL:
-            emails.map((email)=>email.uid === action.payload.uid ? action.payload : email);
-            return [...emails];
+            console.log("let me update");
+            console.log(action.payload);
+           let newEmails = emails.map((email)=>email.uid === action.payload.uid ? action.payload : email);
+            
+            return Array.from(newEmails);
 
         default:
             return emails;

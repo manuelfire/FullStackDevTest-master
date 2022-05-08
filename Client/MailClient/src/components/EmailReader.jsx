@@ -8,9 +8,9 @@ const EmailReader  = (props) =>{
     const dispatch = useDispatch();
     const {selectedEmail,containerToogle,closeButton} = props;
     const [openEmail,setOpenEmail] = useState({'from':"def",'subject':"def",'date':"def",'html':"def"});
-    const emailInfo = useSelector(state => state.email !=null ? state.email.filter(x=>x.uid == selectedEmail):null);
+    const emailInfo = useSelector(state => state.emails !=null ? state.emails.filter(x=>x.uid == selectedEmail):null);
     useEffect(() =>{
-
+        console.log(emailInfo);
         if(selectedEmail !=null) dispatch(IMAPGetMail(selectedEmail));
 
     },[selectedEmail,dispatch]);
@@ -19,7 +19,7 @@ const EmailReader  = (props) =>{
         setOpenEmail(emailInfo);
         console.log("EmailReader");
          console.log(openEmail);
-},[emailInfo]);
+},[selectedEmail]);
 
     if (openEmail == null) return <p>Select a mail!</p>
     
