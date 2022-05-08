@@ -1,0 +1,68 @@
+thead {
+    background-color: white;
+    color: black;
+    tr {
+      display: block;
+      position: relative;
+    }
+  }
+  tbody {
+    
+    display: table;
+    background-color: white;
+    overflow: auto;
+    width: 100vh;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+   
+  }
+
+  .fixedHead{
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+
+  .detail {
+    
+    background-color: rgba(54, 54, 54, 0.808);
+    width: 100%;
+    height: 100%;
+    padding: 40px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    transform:  translateX(100%);
+    transition:all .3s  ease-out;
+    &.open {
+      transform:  translateX(0);
+    }
+  }
+  .detail-container {
+    margin: 0 auto;
+    padding: 40px;
+    max-width: 500px;
+    background-color: white;
+  }
+  
+  
+  .close {
+    background: lightblue;
+    padding: 18px;
+    color: #fff;
+    font-weight: 300;
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 4px;
+    line-height: 1;
+    font-size: 1.8rem;
+    position: fixed;
+    right: 40px;
+    top: 20px;
+    transition: border .3s linear;
+    &:hover, &:focus {
+      background-color: cadetblue;
+      border: 1px solid cadetblue;
+    }
+  }
