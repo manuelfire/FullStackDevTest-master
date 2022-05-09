@@ -4,6 +4,7 @@ const MailClientIMAP = require('./services/imapClient')
 const inspect = require('util').inspect;
 const Imap = require('imap');
 const cors = require('cors');
+const { Client }=  require('yapople');
 var imaps = require('imap-simple');
 const simpleParser = require('mailparser').simpleParser;
 const _ = require('lodash');
@@ -17,22 +18,40 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 app.use(express.json())
 app.use(cors());
 
-app.get('/pop3/Login',async (req, res) => {
+app.post('/pop3/Login',async (req, res) => {
 
+try{
+    let IsTLS = req.body.encryption == "Unencrypted" ? false: true;
+    POP3Connection = new Client({
+        username: req.body.username,
+        password: req.body.password,
+        host: req.body.server,
+        port: req.body.port,
+        tls: IsTLS,
+        mailparser: true
+      
+      });
+      await POP3Connection.connect();
+      res.send("Authenticated");
 
-    var client =  new MailReaderPOP;
-    await client.getAllMail();
-    res.send(client.messages);
+    }catch(error)
+    {
+        res.status(404).json({message: error.message});
+    }
 
 });
 
 
 app.get('/pop3/getAllEmails',async (req, res) => {
 
-
-    var client =  new MailReaderPOP;
-    await client.getAllMail();
-    res.send(client.messages);
+    if(!POP3Connection) {
+        throw new Error('pop3 connection not ready')
+}
+    var i = 1;
+    POP3Connection.forEach((message) => {
+      console.log(message);
+      this.messages.push({"id":i++,"subject":message.subject, "date" : message.receivedDate});
+    });
 
 });
 
@@ -53,8 +72,7 @@ app.post('/imap/Login', async (req, res) => {
         
         
         
-        console.log(req.body);
-        let q =[];
+      
         let IsTLS = req.body.encryption == "Unencrypted" ? false: true;
         var config = {
             imap: {
@@ -66,7 +84,7 @@ app.post('/imap/Login', async (req, res) => {
                 authTimeout: 3000
             }
                 };
-        let err = null;
+        
         IMAPConnection =  await imaps.connect(config);
         console.log("Authenticated");
         res.send("Authenticated"); 

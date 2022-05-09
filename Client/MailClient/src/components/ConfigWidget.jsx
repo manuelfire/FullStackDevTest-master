@@ -2,6 +2,8 @@ import React, { Component, useState } from 'react';
 import './ConfigWidget.scss';
 import { useDispatch } from "react-redux";
 import {IMAPGetAllMail,POP3GetAllMail} from '../redux/Email/email.actions'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 const ConfigWidget = () => {
     
@@ -17,7 +19,7 @@ const dispatch = useDispatch();
 
       });
 
-    function handleInputChange(event) {
+    function handleinputChange(event) {
       const target = event.target;
       const value = target.type === 'checkbox' ? target.checked : target.value;
       const name = target.name;
@@ -42,37 +44,50 @@ const dispatch = useDispatch();
   
     
       return (
-        <form onSubmit={handleSubmit}>
-            <label>Server type
-                   <select name="serverType" value={config.serverType} onChange={handleInputChange}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Server type</Form.Label>
+                   <Form.Select name="serverType" aria-label="IMAP or POP3?" value={config.serverType} onChange={handleinputChange}>
                    <option value="IMAP">IMAP</option>
                     <option value="POP3">POP3</option>
-                   </select>
-                    </label>
-                    <label>
+                   </Form.Select>
+                   </Form.Group>
+                   <Form.Group className="mb-3">
+                    <Form.Label>
                     Encryption
-                    <select name="encryption" value={config.encryption} onChange={handleInputChange}>
+                    </Form.Label>
+                    <Form.Select name="encryption" value={config.encryption} onChange={handleinputChange}>
                     <option value="Unencrypted">Unencrypted</option>
                     <option value="SSL/TLS">SSL/TLS</option>
                     <option value="STARTTLS">STARTTLS</option>
-                    </select>
-                    </label>
-                    <label>
+                    </Form.Select>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                    <Form.Label>
                      Server
-                    <input type="text" name="server" value={config.server} onChange={handleInputChange}  />
-                    </label>
-                    <label>
+                    </Form.Label>
+                    <Form.Control type="text" name="server" value={config.server} onChange={handleinputChange}  />
+                  
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                    <Form.Label>
                      Port
-                    <input type="text" name="port" value={config.port} onChange={handleInputChange} /></label>
-                    <label>Username
-                    <input type="text" name="username" value={config.username} onChange={handleInputChange} />
-                    </label>
-                    
-                    <label>Password
-                    <input type="password" name="password" value={config.password} onChange={handleInputChange}/></label>
-                    <button type="submit" >Start</button>
+                     </Form.Label>
+
+                    <Form.Control type="text" name="port" value={config.port} onChange={handleinputChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type="text" name="username" value={config.username} onChange={handleinputChange} />
+
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" name="password" value={config.password} onChange={handleinputChange}/>
+                    </Form.Group>
+                    <Button type="submit" >Start</Button>
       
-        </form>
+        </Form>
       );
     
   }

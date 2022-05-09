@@ -8,7 +8,8 @@ const EmailReader  = (props) =>{
     const dispatch = useDispatch();
     const {selectedEmail,containerToogle,closeButton} = props;
     const [openEmail,setOpenEmail] = useState({'from':"def",'subject':"def",'date':"def",'html':"def"});
-    const emailInfo = useSelector(state => state.emails !=null ? state.emails.filter(x=>x.uid == selectedEmail):null);
+    const emailInfo = useSelector(state => state.emails.filter(x=>x.uid == selectedEmail));
+    var from = ""
     useEffect(() =>{
         console.log(emailInfo);
         if(selectedEmail !=null) dispatch(IMAPGetMail(selectedEmail));
@@ -16,24 +17,24 @@ const EmailReader  = (props) =>{
     },[selectedEmail,dispatch]);
     useEffect(() =>{
 
-        setOpenEmail(emailInfo);
-        console.log("EmailReader");
-         console.log(openEmail);
-},[selectedEmail]);
+        setOpenEmail(emailInfo[0]);
+        from = openEmail.from.split('<');
+},[emailInfo[0]]);
 
     if (openEmail == null) return <p>Select a mail!</p>
     
     
     return (
+        
         <div className={`detail ${containerToogle  ? "open" : ""}` }>
             <div className="detail-nav">
             <button className="close" onClick={closeButton}>Close</button>
         </div>
         <div className="detail-container">
-        <table className = "fixedHead">
+        <table className = "fixedHead2">
         <thead>
             <tr>
-                <th>From : {openEmail.from} </th>
+                <th>From : {from} </th>
                 <th>Subject : {openEmail.subject}</th>
                 <th>Date : {openEmail.date}</th>
                 

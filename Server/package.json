@@ -41,6 +41,9 @@
     "node-imap": "^0.9.6",
   
       
+    "nodemon": "^2.0.16",
+  
+      
     "react-lazyload": "^3.2.0",
   
       

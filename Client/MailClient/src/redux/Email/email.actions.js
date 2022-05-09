@@ -17,7 +17,7 @@ try{
      dispatch(action);
     }else {
 
-        console.log("Wrong credentials");
+        throw new Error("Wrong credentials");
     }
     
     
@@ -52,13 +52,18 @@ export const IMAPGetMail = (id) => async (dispatch) => {
 export const POP3GetAllMail = (config) => async (dispatch) => {
 
     try{
-        
-        const {data} = await api.POP3fetchAll(config);
+        const {data} = await api.POP3Login(config);
+        if(data == "Authenticated") {
+        const {data} = await api.POP3fetchAll();
         
         console.log(data);
         const action = {type : ActionType.POP3_GETALLMAIL, payload : data};
     
         dispatch(action);
+    }else {
+
+        throw new Error("Wrong credentials");
+    }
     
     }catch(error )
     {
@@ -73,11 +78,12 @@ export const POP3GetAllMail = (config) => async (dispatch) => {
         try{
             
             const {data} = await api.POP3fetchOne(config,id);
-            
+           
             console.log(data);
             const action = {type : ActionType.POP3_GETONEMAIL, payload : data};
         
             dispatch(action);
+            
         
         }catch(error )
         {

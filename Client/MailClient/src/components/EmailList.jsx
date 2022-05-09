@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import RowComponent from './RowComponent';
 import './EmailList.scss';
-
+import Table from 'react-bootstrap/Button';
 
 const EmailList  = (props) =>{
 
@@ -16,8 +16,8 @@ const EmailList  = (props) =>{
    
     
     return (
-        <div>
-        <table className="fixed_headers">
+       
+        <Table className={"responsive hover bordered"}>
             <thead>
                 <tr>
                     <th>From  </th>
@@ -35,8 +35,8 @@ const EmailList  = (props) =>{
               />))
           }
         </tbody>
-        </table>
-        </div>
+        </Table>
+        
     );
 
 };
