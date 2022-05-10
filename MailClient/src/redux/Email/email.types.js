@@ -1,0 +1,19 @@
+export const IMAP_GETALLMAIL = 'IMAP_GETALLMAIL';
+
+export const IMAP_GETONEMAIL = 'IMAP_GETONEMAIL';
+
+export const POP3_GETALLMAIL = 'POP3_GETALLMAIL';
+
+export const POP3_GETONEMAIL = 'POP3_GETONEMAIL';
+
+export const EMAIL_LOGIN = 'EMAIL_LOGIN';
+
+export const NEW_MESSAGE = 'NEW_MESSAGE';
+
+export const EMAIL_CONNECT = 'EMAIL_CONNECT';
+
+export const GET_IMAP_MAIL = 'GET_IMAP_MAIL';
+
+export const GET_POP3_MAIL = 'GET_POP3_MAIL';
+
+

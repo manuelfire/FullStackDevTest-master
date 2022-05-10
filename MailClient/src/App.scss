@@ -1,0 +1,59 @@
+
+@import "~bootstrap/scss/bootstrap";
+
+
+.item1 { grid-area: header; 
+  border-radius: 5px 5px 0px 0px;
+  display: inline-block;
+  box-shadow: 0 2px 4px 0 rgb(0, 0, 0);
+  text-align: center;
+  }
+.item2 { grid-area: main; 
+  overflow-y: scroll;
+  height: 100vh;
+  
+}
+.item3 { grid-area: right;
+          overflow-y: scroll;
+          height: 100vh }
+
+        
+.item4 { grid-area: footer; font-size: 1rem; text-align: center; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'main main main main main main'
+    'footer footer footer footer footer footer';
+  gap: 0px;
+  
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  
+  padding: 20px 0;
+}
+
+
+
+$base: #3b3b3b;
+
+
+body {
+  padding: 20px;
+  background-color: $base;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  color: rgb(0, 0, 0);
+  
+  font-family: 'Helvetica', sans-serif;
+}
+
+
+
+
+
+

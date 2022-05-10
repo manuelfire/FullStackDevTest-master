@@ -1,0 +1,31 @@
+version: "3"
+services:
+  
+  react-email-app:
+    image: manuelfire/react-email-app:latest
+    ports:
+      -  3000:3000
+    container_name: email-app
+    networks:
+      -  email-stack-net
+
+    depends_on:
+      - email-server
+    stdin_open: true
+    tty: true
+
+  email-server:
+    image: manuelfire/react-email-server:latest
+    ports:
+      - 4000:4000
+    container_name: email-api
+    networks:
+      - email-stack-net
+  
+   
+    
+  networks:
+    email-stack-net:
+      driver: bridge
+
+  
